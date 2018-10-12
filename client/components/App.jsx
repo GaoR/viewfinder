@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import axios from 'axios';
+import Clipboard from 'clipboard';
 import Notes from './Notes';
 import Prompt from './Prompt';
 import Setup from './Setup';
+import Snippets from './Snippets';
 import searchStaticTiHistory from './searchStaticTiHistory';
 import searchLiveTiHistory from './searchLiveTiHistory';
 import {
@@ -30,7 +32,7 @@ class App extends Component {
       zoom: ''
     },
     promptUrl: '',
-    promptSelected: false,
+    promptSelected: '',
     suggestedPrompt: '',
     staticTiRows: null,
     liveTiRows: null,
@@ -68,7 +70,7 @@ class App extends Component {
   }
 
   copyPrompt = async event => {
-    this.setState({ promptSelected: true, suggestedPrompt: '' });
+    this.setState({ promptSelected: event.target.id, suggestedPrompt: '' });
     const promptName = event.target.id;
     const promptId = prompts[promptName];
     const { candidateName, startTime } = this.state;
@@ -269,6 +271,9 @@ class App extends Component {
         <br />
         <Prompt
           {...{ loggedIn, copyPrompt, promptUrl, promptSelected }}
+        />
+        <Snippets 
+          {...{ promptSelected }}
         />
         <br />
         <Notes />
