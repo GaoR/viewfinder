@@ -4,23 +4,32 @@ import snippetData from '../../snippets';
 
 class Snippets extends Component {
   state = {
+    initialShow: false,
     show: false,
     snippetIndex: 0,
   };
 
+  componentDidUpdate() {
+    if ((this.props.promptSelected || this.state.show) && !this.state.initialShow) {
+      // Expands on either prompt selection or title click,
+      // but obeys toggleShow afterwards
+      this.setState({ initialShow: true, show: true })
+    }
+  }
+ 
   componentDidMount() {
     new Clipboard('.copy')
   }
 
   increment = () => this.setState({ 
-    snippetIndex: Math.max(
-      snippetData[this.state.prompt].length - 1,
+    snippetIndex: Math.min(
+      snippetData[this.props.promptSelected].length - 1,
       this.state.snippetIndex + 1
     )
   })
   
   decrement = () => this.setState({ 
-    snippetIndex: Math.min(this.state.snippetIndex - 1, 0)
+    snippetIndex: Math.max(this.state.snippetIndex - 1, 0)
   })
 
   toggleShow = () => {
@@ -29,6 +38,7 @@ class Snippets extends Component {
 
   render() {
     const {
+      initialShow,
       show,
       snippetIndex,
     } = this.state;
@@ -37,7 +47,7 @@ class Snippets extends Component {
     return (
       <div>
         <h4 onClick={this.toggleShow}> Prompt snippets </h4>
-        {show ?
+        {initialShow && show ?
           <div>
             <textarea
               id="snippetField"
