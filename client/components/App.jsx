@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import moment from 'moment';
 import axios from 'axios';
-import Clipboard from 'clipboard';
 import Notes from './Notes';
 import Prompt from './Prompt';
 import Setup from './Setup';
@@ -197,7 +196,7 @@ class App extends Component {
           zoom: ''
         },
         promptUrl: '',
-        promptSelected: false,
+        promptSelected: '',
         suggestedPrompt: '',
         staticTiRows: null,
         liveTiRows: null,
