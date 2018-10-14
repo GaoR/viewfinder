@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Clipboard from 'clipboard';
-import snippetData from '../../snippets';
+import snippetsData from '../../snippetsData';
 
 class Snippets extends Component {
   state = {
@@ -23,7 +23,7 @@ class Snippets extends Component {
 
   increment = () => this.setState({ 
     snippetIndex: Math.min(
-      snippetData[this.props.promptSelected].length - 1,
+      snippetsData[this.props.promptSelected].length - 1,
       this.state.snippetIndex + 1
     )
   })
@@ -42,7 +42,7 @@ class Snippets extends Component {
       show,
       snippetIndex,
     } = this.state;
-    const promptSnippets = snippetData[this.props.promptSelected];
+    const promptSnippets = snippetsData[this.props.promptSelected];
     const snippet = promptSnippets ? promptSnippets[snippetIndex] : '';
     return (
       <div>

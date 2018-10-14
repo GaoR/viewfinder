@@ -1,4 +1,4 @@
-const snippets = {
+const snippetsData = {
   versionControl: [
     `This will be the first snippet to appear when Version Control is selected.
     When you click on "Copy and Go Forward", this selection will be copied to the clipboard...`, 
@@ -17,4 +17,4 @@ const snippets = {
   ],
 };
 
-export default snippets;
+export default snippetsData;
